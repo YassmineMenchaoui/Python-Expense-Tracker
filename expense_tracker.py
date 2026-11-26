@@ -1,5 +1,4 @@
-
-expenses = []
+﻿expenses = []
 
 def add_expense():
     description = input("Expense description: ")
@@ -38,6 +37,13 @@ def delete_expense():
     else:
         print("Invalid expense number.")
 
+def show_average():
+    if not expenses:
+        print("No expenses recorded.")
+    else:
+        average = sum(item["amount"] for item in expenses) / len(expenses)
+        print(f"Average expense: {average:.2f}")
+
 def main():
     while True:
         print("\n=== EXPENSE TRACKER ===")
@@ -46,6 +52,7 @@ def main():
         print("3. Show total")
         print("4. Exit")
         print("5. Delete an expense")
+        print("6. Show average")
 
         choice = input("Your choice: ")
 
@@ -60,6 +67,8 @@ def main():
             break
         elif choice == "5":
             delete_expense()
+        elif choice == "6":
+            show_average()
         else:
             print("Invalid choice.")
 
