@@ -1,5 +1,4 @@
-
-expenses = []
+﻿expenses = []
 
 def add_expense():
     description = input("Expense description: ")
@@ -18,6 +17,26 @@ def show_total():
     total = sum(item["amount"] for item in expenses)
     print(f"Total expenses: {total:.2f}")
 
+def delete_expense():
+    if not expenses:
+        print("No expenses to delete.")
+        return
+
+    show_expenses()
+    choice = input("Expense number to delete: ")
+
+    if not choice.isdigit():
+        print("Invalid expense number.")
+        return
+
+    index = int(choice) - 1
+
+    if 0 <= index < len(expenses):
+        removed = expenses.pop(index)
+        print(f"Deleted: {removed['description']}")
+    else:
+        print("Invalid expense number.")
+
 def show_average():
     if not expenses:
         print("No expenses recorded.")
@@ -32,19 +51,26 @@ def main():
         print("2. Show expenses")
         print("3. Show total")
         print("4. Exit")
-        print("5. Show average")
+        print("5. Delete an expense")
+        print("6. Show average")
+
         choice = input("Your choice: ")
+
         if choice == "1":
             add_expense()
         elif choice == "2":
             show_expenses()
         elif choice == "3":
             show_total()
-        elif choice == "5":
-            show_average()
         elif choice == "4":
+            print("Goodbye!")
             break
+        elif choice == "5":
+            delete_expense()
+        elif choice == "6":
+            show_average()
         else:
             print("Invalid choice.")
 
-main()
+if __name__ == "__main__":
+    main()
